@@ -4,9 +4,14 @@ from datetime import datetime, timedelta
 from concurrent.futures import CancelledError
 from google.cloud import pubsub_v1
 import pandas as pd
-import assertions
-from invalid_records import write_invalid_records
 from sqlalchemy import create_engine
+
+try:
+    from . import assertions
+    from .invalid_records import write_invalid_records
+except ImportError:
+    import assertions
+    from invalid_records import write_invalid_records
 
 # ── Configuration ────────────────────────────────────────────────────────────
 PROJECT_ID = "gypsy-493704"
